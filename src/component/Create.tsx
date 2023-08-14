@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Create.style.scss";
+import {Link} from 'react-router-dom'
 
 interface User {
   id: number;
@@ -42,12 +43,12 @@ const Create: React.FC = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='form-container'>
       <form className=' '>
         <div className='col'>
           <input
+           className='input-field'
             type='number'
-            className='form-control'
             placeholder='id'
             aria-label='Id'
             value={formData.id}
@@ -58,8 +59,8 @@ const Create: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='text'
-            className='form-control'
+           className='input-field'
+            type='text'            
             placeholder='name'
             aria-label='Name'
             value={formData.name}
@@ -70,8 +71,8 @@ const Create: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='text'
-            className='form-control'
+           className='input-field'
+            type='text'            
             placeholder='username'
             aria-label='User name'
             value={formData.username}
@@ -82,8 +83,8 @@ const Create: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='email'
-            className='form-control'
+          className='input-field'
+            type='email'            
             placeholder='email'
             aria-label='Email'
             value={formData.email}
@@ -93,9 +94,10 @@ const Create: React.FC = () => {
           />
         </div>
       </form>
-      <button className='btn btn-primary' onClick={handleSubmit}>
+      <button  onClick={handleSubmit} className='btn'>
         Submit
       </button>
+      <Link to="/" className='btn'><input type="button" value="Back" /></Link>
     </div>
   );
 };

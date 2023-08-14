@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import "./Users.style.scss";
+import { Link, useNavigate } from 'react-router-dom';
+import "./Users.m.scss";
 import axios from 'axios';
 
 interface User {
@@ -10,8 +10,13 @@ interface User {
   email: string;
 }
 
-const Read: React.FC = () => {
-  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const Users: React.FC = () => {
+  const [allUsers, setAllUsers] = useState<User[]>([]);  
+
+
+   const userAllDetail: string | null = localStorage.getItem("loginuser");
+  const userSigning = userAllDetail ? JSON.parse(userAllDetail) : null;
+const userName = userSigning ? userSigning.name : null;
 
   useEffect(() => {
     const storedData: string | null = localStorage.getItem("alluser");
@@ -37,10 +42,29 @@ const Read: React.FC = () => {
     localStorage.setItem('alluser', JSON.stringify(updatedUser));
   };
 
+   const navigate = useNavigate();
+  const LogOutUser=()=>{
+    localStorage.removeItem("loginuser" );    
+
+    console.log("logout");
+    alert('You are successfully Logged out!!')
+    navigate('/signup')
+  }
+
   return (
-    <div>
-      <Link to={'/create'} type="button" className='btn btn-success'>Add New User</Link>
-      <table className="table">
+    <div className='container'>
+        <article className='article-header'>
+                <header>
+                    <h1>React: CRUD with TypeScript.</h1>
+                    <p>Welcome {userName}!</p>
+                    <h4>
+            <button onClick={LogOutUser}>LogOut </button> 
+          </h4>
+                </header>
+            </article>
+            <section className='section-content'>
+      <Link to={'/create'} type="button" className='btn m-bt'>Add User</Link>
+      <table>
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -59,15 +83,16 @@ const Read: React.FC = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td><Link className="btn btn-primary" to={`/update/${user.id}`}>Edit</Link></td>
-                  <td><button className="btn btn-primary" type="button" onClick={() => { handleDelete(user.id); }}>Delete</button></td>
+                  <td><button className=" btn-primary" type="button" onClick={() => { handleDelete(user.id); }}>Delete</button></td>
                 </tr>
               );
             })
           }
         </tbody>
       </table>
+      </section>
     </div>
   );
 }
 
-export default Read;
+export default Users;

@@ -43,12 +43,11 @@ const Update: React.FC = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='form-container'>
       <form>
         <div className='col'>
           <input
-            type='number'
-            className='form-control'
+            type='number'            
             placeholder='id'
             aria-label='Id'
             value={formData.id}
@@ -59,8 +58,7 @@ const Update: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='text'
-            className='form-control'
+            type='text'            
             placeholder='name'
             aria-label='name'
             value={formData.name}
@@ -71,8 +69,7 @@ const Update: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='text'
-            className='form-control'
+            type='text'            
             placeholder='username'
             aria-label='name'
             value={formData.username}
@@ -83,8 +80,7 @@ const Update: React.FC = () => {
         </div>
         <div className='col'>
           <input
-            type='email'
-            className='form-control'
+            type='email'            
             placeholder='email'
             aria-label='Email'
             value={formData.email}
@@ -97,7 +93,7 @@ const Update: React.FC = () => {
       <button className='btn btn-primary' onClick={handleEdit}>
         Save Changes
       </button>
-      <Link to='/'>Back</Link>
+      <Link to='/' className='btn'><input type="button" value="Back" /></Link>
     </div>
   );
 };
