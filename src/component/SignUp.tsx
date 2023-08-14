@@ -21,17 +21,17 @@ interface UsersData {
 
 const SignUp = () => {
   const paperStyle = {
-    padding: 20,
-    // height: "70vh",
+    padding: 20,    
     width: 280,
     margin: "20px auto",
   };
-
+  
   const [userSigning, setUserSigning] = useState<UsersData>({
     name: "",
     email: "",
     pwd: "",
   });
+
   console.log(userSigning.name,' name 36')
 
   const navigate = useNavigate();
@@ -40,28 +40,19 @@ const SignUp = () => {
     setUserSigning((prev) => ({ ...prev, [fieldName]: value }));
   };
 
-  // saving value of new user in localstorage and redirecting to login page
-
-  // const signUp =(e:any)=>{
-
-  //         // navigate('/login',{state:{userSigning}})
-
-  // }
 
   const handleSignUp = (e:any) => {
     e.preventDefault();
-    localStorage.setItem("loginuser", JSON.stringify(userSigning));
+    const value= localStorage.setItem("loginuser", JSON.stringify(userSigning));
     console.log("signup working");
     navigate("/login");
-    // const userdata = localStorage.setItem('loginuser',JSON.stringify(userSigning))
+    if(value === null){      
+      navigate('/signup')
+    }
   };
 
   return (
-    <div>
-     {/* {
-!userName? <Users {userSigning.name}={userSigning.name} />: */}
-
-     
+    <div>   
       <form onSubmit={handleSignUp}>
         <Grid>
           <Paper elevation={10} style={paperStyle}>
@@ -81,7 +72,7 @@ const SignUp = () => {
               required
             />
             <TextField
-              id="standard-basic"
+              // id="standard-basic"
               label="email"
               type="email"
               variant="standard"
@@ -134,7 +125,6 @@ const SignUp = () => {
           </Paper>
         </Grid>
       </form>
-       {/* } */}
     </div>
   );
 };
